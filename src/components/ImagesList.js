@@ -7,20 +7,27 @@ const ImagesList = () => {
     const [currenPage, setCurrenPage] = useState(1);
 
     useEffect(() => {
-        if (isLoading) {
-            fetch(`https://picsum.photos/v2/list?page=${currenPage}&limit=10`)
-            .then((responce) => responce.json())
-            .then((data) => {
-                setPhotos(data);
-                setPhotos(prevState =>  [...prevState, ...photos]);
-                setCurrenPage(value => value + 1)
-            })
-            .finally(setLoading(false));
-        }
-    }, [isLoading]);
+        // if (isLoading) {
+        //     fetch(`https://picsum.photos/v2/list?page=${currenPage}&limit=10`)
+        //     .then((responce) => responce.json())
+        //     .then((data) => {
+        //         setPhotos(prevState =>  [...prevState, ...data]);
+        //         setCurrenPage(value => value + 1)
+        //     })
+        //     .finally(setLoading(false));
+        // }
+        fetch(`https://picsum.photos/v2/list?page=${currenPage}&limit=10`)
+        .then((responce) => responce.json())
+        .then((data) => {
+            setPhotos(data);
+            setPhotos(prevState =>  [...prevState, ...photos]);
+        })
+        .finally(setLoading(false));
+}, [isLoading]);
 
     const handleShowMore = () => {
         setLoading(true);
+        setCurrenPage(value => value + 1);
     }
 
     if (isLoading) {
