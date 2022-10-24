@@ -8,12 +8,11 @@ const ImagesList = () => {
 
     useEffect(() => {
         setLoading(true);
-        
+
         fetch(`https://picsum.photos/v2/list?page=${currenPage}&limit=10`)
         .then((responce) => responce.json())
         .then((data) => {
-            setPhotos(data)
-            setPhotos(prevState =>  [...prevState, ...photos]);
+            setPhotos(prevState =>  [...prevState, ...data]);
         })
         .finally(setLoading(false));
 }, [currenPage]);
